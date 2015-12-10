@@ -49,13 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
     @Override
     public void onClick(View v) {
         boolean resultadoLocal = comprobarArrays(local);
         boolean resultadovisitante = comprobarArrays(visitante);
-
-        if (resultadoLocal && resultadovisitante){
+        //comprobamos que no se produzcan coincidencias de dorsales dentro del mismo equipo y que los nombres de los equipos sean diferentes
+        if (resultadoLocal && resultadovisitante && !(local[0].getText().toString().toUpperCase().equals(visitante[0].getText().toString().toUpperCase()))){
             String[] localR = pasarACadena(local);
             String[] visitanteR = pasarACadena(visitante);
             Intent intent = new Intent(MainActivity.this,Juego.class);
@@ -65,8 +64,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtras(b);
             startActivity(intent);
         }
-
-
 
     }
     private String[] pasarACadena(EditText[] lista){
@@ -78,19 +75,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean comprobarArrays(EditText[] lista) {
-
-        for (int i=1; i<10;i++ ) {
-           for (int j=1; j<i;j++ ){
-               if (lista[i].getText().toString().equals("")) {
-                   return false;
-               }else {
-                   if (Integer.parseInt(lista[i].getText().toString()) == Integer.parseInt(lista[j].getText().toString()))
-                       return false;
-               }
-           }
+        if (lista[0].getText().toString().equals("")) //comprobamos el nombre del equípo no este vacío
+            return false;
+        if (lista[1].getText().toString().equals("")) //comprobamos el 1º dorsal que no este vacía
+            return false;
+        else {
+            for (int i = 1; i < 10; i++) { //comprobamos los demas dorsales a partir del primer dorsal
+                for (int j = 1; j < i; j++) {
+                    if (lista[i].getText().toString().equals("")) {
+                        return false;
+                    } else {
+                        if (Integer.parseInt(lista[i].getText().toString()) == Integer.parseInt(lista[j].getText().toString()))
+                            return false;
+                    }
+                }
+            }
+            return true;
         }
-        return true;
     }
-
 
 }

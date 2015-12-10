@@ -15,7 +15,7 @@ public class Estadisticas extends AppCompatActivity {
     String[] dorsalesLocales,dorsalesVisitantes,canastasLocales,canastasVisitantes;
     TextView[] elementosLocal = new TextView[24];
     TextView[] elementosVisitante = new TextView[24];
-
+    Bundle bundle;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menuestadisticas,menu);
@@ -38,7 +38,7 @@ public class Estadisticas extends AppCompatActivity {
         }
         return true;
     }
-    Bundle bundle;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.estadisticas);
@@ -111,6 +111,7 @@ public class Estadisticas extends AppCompatActivity {
         elementosVisitante[0].setText(nombreVisitante);
         elementosLocal[1].setText(marcadorlocal);
         elementosVisitante[1].setText(marcadorvisitante);
+
         /**
          * saltamos los indices 2 y 3 porque necesitamos antes saber cuantas canastas puntuaron cada jugador, pasamos a asignar dorsales y puntos de estos
          * Para recorrerlo tanto los dorsales de ambos equipos como las canatas que encesto cada jugador, he creado un bucle for de la siguiente forma:
@@ -119,7 +120,6 @@ public class Estadisticas extends AppCompatActivity {
          * 3- El indice j indica el indice donde estan los jugadores en el array global de cada equipo, es decir, en el indice 4 empiezan los dorsales de cada jugador hasta 14 (5 titulares y 5 suplentes)
          * 4- El indice k indica el indice donde empiezan a almacenarse la puntuación de cada jugador
          */
-
 
         for (int i = 0, j=4; i <dorsalesLocales.length;i++,j++){
             elementosLocal[j].setText(dorsalesLocales[i]);
