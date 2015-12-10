@@ -81,13 +81,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return false;
         else {
             for (int i = 1; i < 10; i++) { //comprobamos los demas dorsales a partir del primer dorsal
+                if (lista[i].getText().toString().equals(""))
+                    return false;
                 for (int j = 1; j < i; j++) {
-                    if (lista[i].getText().toString().equals("")) {
+                    if (Integer.parseInt(lista[i].getText().toString()) == Integer.parseInt(lista[j].getText().toString()))
                         return false;
-                    } else {
-                        if (Integer.parseInt(lista[i].getText().toString()) == Integer.parseInt(lista[j].getText().toString()))
-                            return false;
-                    }
                 }
             }
             return true;
